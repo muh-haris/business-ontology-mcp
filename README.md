@@ -31,6 +31,8 @@ See [Architecture Design](docs/architecture.md).
 ONT-01: Architecture and reference analysis.
 Implementation begins in ONT-02.
 
+# ONT-02
+
 ## Business Ontology Schema
 
 The initial ontology is defined in
@@ -75,3 +77,34 @@ basic reference checking.
 
 Full business-record validation and graph
 construction are implemented in later tasks.
+
+# ONT-03
+
+## Business Record Validation
+
+The ontology validator checks business records
+and relationships against the declared schema.
+
+Supported checks:
+
+- Required and unknown properties
+- Property data types
+- Unique entity identifiers
+- Referential integrity
+- Relationship cardinality
+- Duplicate relationships
+
+### Run demonstration
+
+python check_validation.py
+
+### Test invalid data
+
+python check_validation.py --invalid
+
+### Run automated tests
+
+python -m pytest -v
+
+For implementation details, see:
+docs/ont03-record-validation.md
