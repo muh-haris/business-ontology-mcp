@@ -75,3 +75,59 @@ def test_resource_contains_expected_ontology():
 def test_resource_missing_schema_rejected():
     with pytest.raises(ValueError, match='contents'):
         validate_resource({'result': {'contents': []}})
+
+
+def test_tool_listing_accepts_bare_result():
+    validate_tool_listing({'tools': [{'name': name} for name in EXPECTED_TOOLS]})
+
+
+def test_product_query_accepts_bare_result():
+    validate_product_query(purchase_payload()['result'])
+
+
+def test_resource_accepts_bare_result():
+    validate_resource({'contents': [{'text': json.dumps({
+        'name': 'commerce_core',
+        'entities': {'Customer': {}, 'Order': {}, 'Product': {}, 'Invoice': {}},
+    })}]})
+
+
+def test_inspector_error_payload_is_rejected():
+    with pytest.raises(ValueError, match='Inspector returned an error'):
+        extract_result({'error': {'code': 'server_not_found', 'message': 'Missing server'}})
+
+
+def test_unrecognized_response_has_diagnostic():
+    with pytest.raises(ValueError, match='keys='):
+        extract_result({'status': 'unexpected'})
+
+
+def test_main_uses_windows_safe_inspector_tool_argument(monkeypatch, tmp_path):
+    # Regression: JSON passed via npx.cmd can lose its embedded quotes on Windows.
+    from scripts import inspector_smoke as smoke
+
+    config = tmp_path / "inspector.json"
+    config.write_text("{}", encoding="utf-8")
+    monkeypatch.setattr(smoke, "CONFIG_PATH", config)
+    invocations = []
+
+    def fake_call(*args):
+        invocations.append(args)
+        if "tools/list" in args:
+            return {"tools": [{"name": name} for name in EXPECTED_TOOLS]}
+        if "tools/call" in args:
+            return purchase_payload()["result"]
+        if "resources/read" in args:
+            return {"contents": [{"text": json.dumps({
+                "name": "commerce_core",
+                "entities": {name: {} for name in ("Customer", "Order", "Product", "Invoice")},
+            })}]}
+        raise AssertionError("Unexpected Inspector method")
+
+    monkeypatch.setattr(smoke, "call_inspector", fake_call)
+    smoke.main()
+
+    tool_call = next(args for args in invocations if "tools/call" in args)
+    assert "--tool-arg" in tool_call
+    assert tool_call[tool_call.index("--tool-arg") + 1] == "product_id=P001"
+    assert "--tool-args-json" not in tool_call

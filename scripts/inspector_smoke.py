@@ -19,11 +19,32 @@ EXPECTED_TOOLS = {
 
 
 def extract_result(envelope: dict[str, Any]) -> dict[str, Any]:
+    """Normalize Inspector JSON envelopes and older bare MCP result objects.
+
+    Never treat an error or an unknown JSON structure as successful MCP output.
+    """
     if not isinstance(envelope, dict):
-        raise ValueError('Inspector output is not an object')
-    result = envelope.get('result')
+        raise ValueError(f'Inspector output is not a JSON object: {type(envelope).__name__}')
+
+    if envelope.get('error') is not None:
+        raise ValueError(f'Inspector returned an error: {envelope["error"]!r}')
+
+    if 'result' in envelope:
+        result = envelope['result']
+    elif any(key in envelope for key in ('tools', 'structuredContent', 'contents')):
+        # Some Inspector CLI versions emit the MCP result directly.
+        result = envelope
+    else:
+        raise ValueError(
+            'Inspector response has no recognizable MCP result; '
+            f'keys={list(envelope)}; response={str(envelope)[:1500]}'
+        )
+
     if not isinstance(result, dict):
-        raise ValueError('Inspector response has no result object')
+        raise ValueError(
+            'Inspector response has no result object; '
+            f'result={str(result)[:1500]}'
+        )
     if result.get('isError') is True:
         raise ValueError('Inspector reported MCP tool error')
     return result
@@ -90,8 +111,9 @@ def call_inspector(*args: str) -> dict[str, Any]:
         raise RuntimeError('Inspector command timed out') from exc
     if completed.returncode:
         raise RuntimeError(
-            f'Inspector exited {completed.returncode}: '
-            f'{completed.stderr.strip()[-1200:]}'
+            f'Inspector exited {completed.returncode}. '
+            f'stdout={completed.stdout.strip()[-1200:]}; '
+            f'stderr={completed.stderr.strip()[-1200:]}'
         )
     try:
         return json.loads(completed.stdout)
@@ -112,7 +134,7 @@ def main() -> None:
     validate_product_query(call_inspector(
         '--method', 'tools/call',
         '--tool-name', 'purchases_for_product',
-        '--tool-args-json', json.dumps({'product_id': 'P001'}),
+        '--tool-arg', 'product_id=P001',
     ))
     print('P001 query: three grounded purchases VERIFIED')
     validate_resource(call_inspector(
