@@ -108,3 +108,35 @@ python -m pytest -v
 
 For implementation details, see:
 docs/ont03-record-validation.md
+
+# ONT-04
+
+## Synthetic Business Dataset
+
+The project includes a reproducible synthetic
+commerce dataset in `sample_data/`.
+
+It contains:
+
+- 6 customers
+- 8 products
+- 10 orders
+- 10 invoices
+- 40 relationships
+
+All records are fictional.
+
+### Load and validate
+
+python load_sample_data.py
+
+### Run tests
+
+python -m pytest -v
+
+The CSV loader uses ontology-defined property types
+and the ONT-03 record validator.
+
+See docs/ont04-sample-data.md for dataset details.
+
+Graph construction will be implemented in ONT-05.
