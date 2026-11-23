@@ -140,3 +140,31 @@ and the ONT-03 record validator.
 See docs/ont04-sample-data.md for dataset details.
 
 Graph construction will be implemented in ONT-05.
+
+# ONT-05
+
+## Knowledge Graph Adapter
+
+ONT-05 adds a validated, typed knowledge graph
+using NetworkX.
+
+### Build and query the graph
+
+python build_graph.py
+
+### Export for Omnigraph
+
+python export_omnigraph.py
+
+### Run tests
+
+python -m pytest -v
+
+The NetworkX adapter supports entity lookup and
+directed relationship traversal.
+
+An Omnigraph schema and JSONL export bridge is
+provided. Live Omnigraph loading still requires
+verification against a compatible CLI.
+
+See docs/ont05-graph-adapter.md for details.
