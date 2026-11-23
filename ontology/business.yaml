@@ -1,0 +1,70 @@
+version: "1.0"
+name: commerce_core
+description: Core customer, order, product, and invoice concepts for a small business.
+
+entities:
+  Customer:
+    description: Person or organization that places orders.
+    key: customer_id
+    properties:
+      customer_id:
+        { type: string, required: true, description: Unique customer ID }
+      name: { type: string, required: true, description: Customer display name }
+      email: { type: string, description: Contact email }
+
+  Product:
+    description: Item available for purchase.
+    key: product_id
+    properties:
+      product_id:
+        { type: string, required: true, description: Unique product ID }
+      name: { type: string, required: true, description: Product name }
+      unit_price: { type: number, required: true, description: Price per unit }
+      currency: { type: string, required: true, description: ISO currency code }
+
+  Order:
+    description: Purchase request placed by a customer.
+    key: order_id
+    properties:
+      order_id: { type: string, required: true, description: Unique order ID }
+      order_date: { type: date, required: true, description: Date of order }
+      status: { type: string, required: true, description: Order status }
+
+  Invoice:
+    description: Invoice issued for an order.
+    key: invoice_id
+    properties:
+      invoice_id:
+        { type: string, required: true, description: Unique invoice ID }
+      amount: { type: number, required: true, description: Invoice total }
+      currency: { type: string, required: true, description: ISO currency code }
+      status:
+        { type: string, required: true, description: Invoice payment status }
+
+relationships:
+  PLACES:
+    description: Customer places an order.
+    source: Customer
+    target: Order
+    cardinality: one_to_many
+
+  CONTAINS:
+    description: Order contains products.
+    source: Order
+    target: Product
+    cardinality: many_to_many
+
+  HAS_INVOICE:
+    description: Order has an invoice.
+    source: Order
+    target: Invoice
+    cardinality: one_to_one
+
+metrics:
+  paid_invoice_amount:
+    description: Sum of paid invoice amounts, separately by currency; not recognized revenue.
+    source: Invoice
+    field: amount
+    aggregate: sum
+    filters: { status: paid }
+    group_by: [currency]
