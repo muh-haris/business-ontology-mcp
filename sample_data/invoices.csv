@@ -1,0 +1,11 @@
+invoice_id,amount,currency,status
+I001,20.50,USD,paid
+I002,47.00,USD,paid
+I003,22.50,USD,pending
+I004,25.00,USD,paid
+I005,53.00,USD,pending
+I006,47.50,USD,paid
+I007,30.00,USD,paid
+I008,40.00,USD,pending
+I009,18.00,USD,paid
+I010,67.00,USD,paid

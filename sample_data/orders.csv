@@ -1,0 +1,11 @@
+order_id,order_date,status
+O001,2026-11-01,fulfilled
+O002,2026-11-02,fulfilled
+O003,2026-11-03,placed
+O004,2026-11-04,fulfilled
+O005,2026-11-05,placed
+O006,2026-11-06,fulfilled
+O007,2026-11-07,fulfilled
+O008,2026-11-08,placed
+O009,2026-11-09,fulfilled
+O010,2026-11-10,fulfilled
