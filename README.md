@@ -192,3 +192,40 @@ relationships, product queries, invalid
 requests, and deterministic results.
 
 See docs/ont08-quality-audit.md.
+
+# ONT-09
+
+## Final Demonstration
+
+The project provides a validated business ontology,
+a NetworkX knowledge graph, five read-only MCP
+tools and a reproducible synthetic dataset.
+
+### Run the final demonstration
+
+python final_demo.py
+
+### Run the quality audit
+
+python quality_audit.py
+
+### Verify MCP interoperability
+
+python demo_mcp_client.py
+python scripts/inspector_setup.py
+python -m scripts.inspector_smoke
+
+### Run automated tests
+
+python -m pytest -v
+
+### Documentation
+
+- docs/ont09-final-report.md
+- docs/ont09-demo-guide.md
+
+### Limitations
+
+Native Omnigraph CLI import is not yet verified.
+The independent MCP client integration does not
+constitute an autonomous LLM-agent evaluation.
