@@ -1,3 +1,4 @@
+reports/generated/
 .mcp-local/
 exports/
 .venv/

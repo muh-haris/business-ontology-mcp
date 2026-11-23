@@ -168,3 +168,27 @@ provided. Live Omnigraph loading still requires
 verification against a compatible CLI.
 
 See docs/ont05-graph-adapter.md for details.
+
+# ONT-08
+
+## End-to-End Integration and Reliability
+
+ONT-08 verifies the complete synthetic business
+data pipeline:
+
+CSV -> Ontology Validation -> NetworkX Graph
+-> Semantic Service -> Grounded Business Queries
+
+### Run the integration tests
+
+python -m pytest -v tests/test_e2e_integration.py tests/test_quality_audit.py
+
+### Generate the quality audit
+
+python quality_audit.py
+
+The audit checks all graph entities and
+relationships, product queries, invalid
+requests, and deterministic results.
+
+See docs/ont08-quality-audit.md.
