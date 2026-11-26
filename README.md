@@ -229,3 +229,36 @@ python -m pytest -v
 Native Omnigraph CLI import is not yet verified.
 The independent MCP client integration does not
 constitute an autonomous LLM-agent evaluation.
+
+# ONT-10
+
+## Interactive Frontend Dashboard
+
+This project includes a browser-based interface for
+exploring the validated business knowledge graph.
+
+Features:
+
+- Interactive graph with zoom, pan and node inspection
+- Entity search and directory
+- Product purchase queries
+- Data insights and relationship visualizations
+- Read-only FastAPI endpoints
+
+### Installation
+
+python -m pip install -r requirements-ui.txt
+
+### Run
+
+python ui_server.py
+
+Open http://127.0.0.1:8000
+
+### Tests
+
+python -m pytest -v tests/test_ui_api.py
+
+See docs/ui-frontend-guide.md for the complete guide.
+
+![Dashboard](docs/assets/ontology_studio_desktop.png)
