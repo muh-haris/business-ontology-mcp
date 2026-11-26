@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Explore your business ontology as an interactive knowledge graph.">
+  <title>Ontology Studio — Business Knowledge Graph</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script src="/assets/app.js" defer></script>
+</head>
+<body>
+  <svg aria-hidden="true" class="icon-sprite" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-nodes" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.5 6h7M7 8.3l4 7M17 8.3l-4 7"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/><rect x="14" y="14" width="7" height="7" rx="1.4"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.7" cy="10.7" r="6.7"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="8.5" ry="3"/><path d="M3.5 5.5v6C3.5 13.3 7.3 15 12 15s8.5-1.7 8.5-3.5v-6M3.5 11.5v6C3.5 19.3 7.3 21 12 21s8.5-1.7 8.5-3.5v-6"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 3 10 21"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="2.5"/><circle cx="16" cy="17" r="2.5"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 18V5m-5 5 5-5 5 5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M4 12h16"/></symbol>
+    <symbol id="i-maximize" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 10a8 8 0 0 0-14-4L3 9M3 4v5h5M4 14a8 8 0 0 0 14 4l3-3M21 20v-5h-5"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 18v3h16v-3"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5h.01"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 9h18M9 9v12"/></symbol>
+  </svg>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <div class="brand">
+        <div class="brand-mark"><svg class="icon brand-icon"><use href="#i-nodes"/></svg></div>
+        <div><div class="brand-title">ontology<span>.</span></div><div class="brand-sub">BUSINESS INTELLIGENCE</div></div>
+      </div>
+      <div class="workspace-badge"><span class="workspace-emoji">◈</span><span><b>Commerce Core</b><small>Active workspace</small></span><svg class="icon chevron"><use href="#i-chevron"/></svg></div>
+      <div class="nav-label">WORKSPACE</div>
+      <nav class="nav-list" id="navigation">
+        <button type="button" data-page="explorer" class="nav-item active"><svg class="icon"><use href="#i-nodes"/></svg>Graph Explorer<span class="nav-count">01</span></button>
+        <button type="button" data-page="directory" class="nav-item"><svg class="icon"><use href="#i-database"/></svg>Entity Directory</button>
+        <button type="button" data-page="query" class="nav-item"><svg class="icon"><use href="#i-search"/></svg>Query Workbench</button>
+        <button type="button" data-page="insights" class="nav-item"><svg class="icon"><use href="#i-grid"/></svg>Data Insights</button>
+      </nav>
+      <div class="nav-label nav-label-system">DEVELOPER</div>
+      <a href="/docs" target="_blank" rel="noopener noreferrer" class="nav-item nav-link"><svg class="icon"><use href="#i-code"/></svg>API Documentation<svg class="icon external-icon"><use href="#i-up"/></svg></a>
+      <div class="sidebar-grow"></div>
+      <div class="environment-card">
+        <div class="environment-top"><span class="small-dot"></span><b>Local environment</b></div>
+        <div>NetworkX graph adapter</div>
+        <div class="env-divider"></div>
+        <div class="env-row"><span>Dataset</span><strong>Sample · Synthetic</strong></div>
+        <div class="env-row"><span>Access</span><strong>Read-only</strong></div>
+      </div>
+      <div class="sidebar-footer"><span class="avatar">KG</span><span><b>Knowledge Graph Studio</b><small>Developer environment</small></span></div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="crumbs"><span>Workspace</span><svg class="icon"><use href="#i-chevron"/></svg><strong id="breadcrumb">Graph Explorer</strong></div>
+        <div class="topbar-right"><span class="topbar-pill"><span class="small-dot"></span>System online</span><span class="topbar-div"></span><span class="topbar-dataset">Synthetic data</span><div class="user-avatar">BO</div></div>
+      </header>
+
+      <div class="content-container">
+        <section class="page visible" id="page-explorer" aria-label="Graph Explorer">
+          <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> KNOWLEDGE INTELLIGENCE PLATFORM</div><h1>Explore your <span>business graph.</span></h1><p>Discover connections, inspect entities, and navigate relationships across your commerce ontology.</p></div><button class="btn btn-secondary page-action" id="exportGraph"><svg class="icon"><use href="#i-download"/></svg>Export graph JSON</button></div>
+
+          <div class="stats-grid">
+            <div class="stat-card"><div class="stat-top"><span>Total entities</span><span class="stat-icon stat-purple">◈</span></div><div class="stat-value" id="statEntities">—</div><div class="stat-meta"><span class="tag tag-purple">4 entity types</span> in the graph</div></div>
+            <div class="stat-card"><div class="stat-top"><span>Relationships</span><span class="stat-icon stat-cyan">⌘</span></div><div class="stat-value" id="statEdges">—</div><div class="stat-meta"><span class="tag tag-cyan">3 relation types</span> connected</div></div>
+            <div class="stat-card"><div class="stat-top"><span>Ontology types</span><span class="stat-icon stat-amber">◇</span></div><div class="stat-value" id="statTypes">—</div><div class="stat-meta"><span class="tag tag-amber">Validated</span> schema</div></div>
+            <div class="stat-card"><div class="stat-top"><span>MCP tools</span><span class="stat-icon stat-green">✳</span></div><div class="stat-value" id="statTools">—</div><div class="stat-meta"><span class="tag tag-green">Ready</span> for MCP clients</div></div>
+          </div>
+
+          <div class="workspace-grid">
+            <div class="panel graph-panel">
+              <div class="panel-header graph-header"><div><h2>Knowledge graph <span class="header-count" id="graphCount">—</span></h2><p>Interactive view of your validated business relationships</p></div><div class="graph-header-actions"><span class="live-pill"><span class="small-dot"></span>LIVE DATA</span><button class="icon-btn mobile-info" id="showNodeDetails" aria-label="Selected node details"><svg class="icon"><use href="#i-info"/></svg></button></div></div>
+              <div class="graph-filters"><div class="graph-search"><svg class="icon"><use href="#i-search"/></svg><input id="graphSearch" type="search" placeholder="Search nodes, e.g. C001 or Notebook" autocomplete="off" aria-label="Search graph nodes"></div><label class="sr-only" for="relationFilter">Relationship filter</label><select id="relationFilter"><option value="all">All relationships</option></select><label class="sr-only" for="layoutFilter">Graph layout</label><select id="layoutFilter"><option value="force">Organic layout</option><option value="columns">By entity type</option></select></div>
+              <div class="graph-area" id="graphArea"><svg id="graphSvg" class="graph-svg" role="img" aria-label="Interactive commerce relationship graph" viewBox="0 0 1000 580" preserveAspectRatio="xMidYMid meet"><defs><pattern id="graphDots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#263444" opacity="0.65"/></pattern><marker id="arrowHead" viewBox="0 0 10 10" refX="17" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#4a6072"/></marker></defs><rect width="1000" height="580" fill="url(#graphDots)" class="graph-background"/><g id="viewport"><g id="graphEdges"></g><g id="graphNodes"></g></g></svg>
+                <div class="graph-tip"><span class="tip-pulse">✣</span> Drag nodes to explore · Scroll to zoom</div>
+                <div class="zoom-tools"><button type="button" id="zoomIn" aria-label="Zoom in" title="Zoom in"><svg class="icon"><use href="#i-plus"/></svg></button><button type="button" id="zoomOut" aria-label="Zoom out" title="Zoom out"><svg class="icon"><use href="#i-minus"/></svg></button><button type="button" id="fitGraph" aria-label="Fit graph" title="Fit graph"><svg class="icon"><use href="#i-maximize"/></svg></button><button type="button" id="resetGraph" aria-label="Reset layout" title="Reset layout"><svg class="icon"><use href="#i-refresh"/></svg></button></div>
+              </div>
+              <div class="graph-footer"><div class="graph-legend" id="graphLegend"></div><div class="graph-footer-count" id="visibleCount">—</div></div>
+            </div>
+            <aside class="right-stack" id="nodePanel">
+              <div class="panel details-panel"><div class="side-panel-head"><h2>Entity Inspector</h2><span class="side-mini-icon">⌗</span></div><div id="entityDetails" class="details-content"><div class="empty-state"><span class="empty-state-icon">◎</span><strong>Select a graph node</strong><p>Click any node to inspect its fields and connected entities.</p></div></div></div>
+              <div class="panel mini-query-panel"><div class="side-panel-head"><h2>Quick query</h2><span class="query-bolt">⚡</span></div><p>Explore which customers ordered a product.</p><label class="form-label" for="quickProduct">PRODUCT</label><select id="quickProduct" class="full-select"></select><button class="btn btn-primary" id="quickRun"><svg class="icon"><use href="#i-arrow"/></svg>Run graph query</button><div id="quickQueryResult" class="quick-query-result">Select a product to trace its connections.</div></div>
+            </aside>
+          </div>
+          <div class="bottom-grid"><div class="panel breakdown-panel"><div class="panel-title-row"><div><h2>Entity distribution</h2><p>Breakdown of all validated graph records</p></div><span class="small-info">BY TYPE</span></div><div id="entityBars" class="breakdown-bars"></div></div><div class="panel breakdown-panel"><div class="panel-title-row"><div><h2>Relationship distribution</h2><p>How business concepts connect</p></div><span class="small-info">BY EDGE</span></div><div id="relationBars" class="breakdown-bars"></div></div></div>
+        </section>
+
+        <section class="page" id="page-directory" aria-label="Entity Directory"><div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> EXPLORE DATA</div><h1>Entity <span>directory.</span></h1><p>Browse all source-backed records stored in your validated knowledge graph.</p></div></div><div class="panel directory-panel"><div class="directory-controls"><div class="graph-search"><svg class="icon"><use href="#i-search"/></svg><input id="directorySearch" type="search" placeholder="Search IDs, names, email or status" aria-label="Search entity directory"></div><label class="sr-only" for="directoryType">Entity type</label><select id="directoryType"><option value="all">All entity types</option></select><span id="directoryCount" class="directory-count"></span></div><div class="table-scroll"><table class="data-table"><thead><tr><th>Entity</th><th>Type</th><th>Identifier</th><th>Properties</th><th></th></tr></thead><tbody id="entityRows"></tbody></table></div></div></section>
+
+        <section class="page" id="page-query" aria-label="Query Workbench"><div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> SEMANTIC QUERIES</div><h1>Query <span>workbench.</span></h1><p>Follow actual product-to-order-to-customer relationships. Results are grounded in the sample dataset.</p></div></div><div class="query-layout"><div class="panel query-workspace"><div class="panel-title-row"><div><h2>Product purchase explorer</h2><p>Traverse CONTAINS → PLACES → HAS_INVOICE</p></div><span class="tag tag-green">Read-only</span></div><div class="query-form"><div><label class="form-label" for="workbenchProduct">PRODUCT</label><select class="full-select" id="workbenchProduct"></select></div><button class="btn btn-primary" id="workbenchRun">Execute query<svg class="icon"><use href="#i-arrow"/></svg></button></div><div id="queryOutput" class="query-output"><div class="empty-state"><span class="empty-state-icon">⌘</span><strong>Ready to query</strong><p>Choose a product and execute the graph traversal.</p></div></div></div><div class="panel query-explainer"><div class="panel-title-row"><h2>How this query works</h2></div><div class="query-steps"><div><span>01</span><strong>Product</strong><p>Start with a validated Product ID.</p></div><div><span>02</span><strong>Order</strong><p>Follow incoming CONTAINS edges.</p></div><div><span>03</span><strong>Customer</strong><p>Follow incoming PLACES edges.</p></div><div><span>04</span><strong>Invoice</strong><p>Follow outgoing HAS_INVOICE edges.</p></div></div><div class="caution"><svg class="icon"><use href="#i-info"/></svg><span>Invoice amounts are for the whole order, not product-specific revenue.</span></div></div></div></section>
+
+        <section class="page" id="page-insights" aria-label="Data Insights"><div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> DATA OBSERVABILITY</div><h1>Graph <span>insights.</span></h1><p>Structural metrics computed from your current synthetic dataset.</p></div></div><div class="insight-grid"><div class="panel insight-card"><div class="panel-title-row"><h2>Entity composition</h2></div><div id="insightEntityBars" class="breakdown-bars"></div></div><div class="panel insight-card"><div class="panel-title-row"><h2>Relationship structure</h2></div><div id="insightRelationBars" class="breakdown-bars"></div></div><div class="panel insight-card"><div class="panel-title-row"><h2>Invoice status</h2></div><div id="invoiceStatusBars" class="breakdown-bars"></div><p class="insight-footnote">Payment status is preserved exactly as recorded; no revenue recognition is inferred.</p></div><div class="panel insight-card"><div class="panel-title-row"><h2>Products by order count</h2></div><div id="topProductsBars" class="breakdown-bars"></div><p class="insight-footnote">Counts represent order/product relationships in synthetic records.</p></div></div></section>
+      </div>
+      <footer class="page-footer"><span>Ontology Studio · Powered by your verified NetworkX semantic layer</span><span>Local only · Read-only API · Synthetic data</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
